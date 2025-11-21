@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const app = require("./app");
 const config = require("./config")
 
-mongoose.connect(config.db, (err, res) => {
+mongoose.connect("mongodb+srv://fdgo9910_db_user:Fabi.123@fabian.pmm8y8v.mongodb.net/?appName=Fabian", (err, res) => {
   if (err) throw err;
   console.log("consexion exitosa");
 
