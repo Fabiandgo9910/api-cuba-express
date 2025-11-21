@@ -155,7 +155,7 @@ const cuentaController = {
    */
   async createCuenta(req, res) {
     console.log(req);
-    
+
     try {
       const { id } = req.body;
 
@@ -192,6 +192,45 @@ const cuentaController = {
       res.status(500).json({
         success: false,
         message: 'Error al crear la cuenta',
+        error: error.message
+      });
+    }
+  },
+
+  /**
+ * Obtiene cuentas filtradas por origen
+ */
+  async getCuentasByOrigen(req, res) {
+    try {
+      const { origen } = req.params;
+
+      if (!origen) {
+        return res.status(400).json({
+          success: false,
+          message: 'Se requiere el parámetro origen'
+        });
+      }
+
+      const cuentas = await Cuenta.find({ origen });
+
+      if (!cuentas || cuentas.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: 'No se encontraron cuentas con ese origen'
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        count: cuentas.length,
+        data: cuentas
+      });
+
+    } catch (error) {
+      console.error('Error en getCuentasByOrigen:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error al obtener las cuentas por origen',
         error: error.message
       });
     }
