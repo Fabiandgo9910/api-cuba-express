@@ -14,7 +14,7 @@ const authController = {
         return res.status(400).json({ errors: errors.array() });
       }
 
-      const { id, email, displayName, password, admin = false } = req.body;
+      const { id, rol, email, displayName, password, admin = false } = req.body;
 
       // Verificar si el usuario ya existe
       const existingUser = await User.findOne({ email });
@@ -25,6 +25,7 @@ const authController = {
       // Crear nuevo usuario
       const newUser = new User({
         id,
+        rol,
         email,
         displayName,
         password,
@@ -45,6 +46,7 @@ const authController = {
           user: {
             id: newUser.id,
             _id: newUser._id,
+            rol: newUser.rol,
             email: newUser.email,
             displayName: newUser.displayName,
             admin: newUser.admin

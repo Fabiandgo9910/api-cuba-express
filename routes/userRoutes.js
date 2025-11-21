@@ -29,6 +29,9 @@ const authMiddleware = require('../middlewares/auth');
  *         id:
  *           type: string
  *           example: 5f8d0d55b54764421b7156c3
+ *         rol:
+ *           type: int
+ *           example: 1
  *         email:
  *           type: string
  *           format: email
@@ -98,12 +101,15 @@ const authMiddleware = require('../middlewares/auth');
  *             type: object
  *             required:
  *               - id
+ *               - rol
  *               - email
  *               - displayName
  *               - password
  *             properties:
  *               id:
  *                 type: string
+ *               rol: 
+ *                 type: number
  *               email:
  *                 type: string
  *                 format: email
